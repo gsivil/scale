@@ -14,7 +14,12 @@ typedef struct allchunks {
     length_byte chunk_data[wordsize][wordsize];
     char CRC[4];
 } chunk;
-    
+// Critical chunks
+// IHDR first chunk 13 bytes width, height, bit depth, color type, compression method, filter method, and interlace
+// method
+// PLTE contains the palette aka list of colors
+// IDAT contains the image, split it in multiple IDAT chunks for simplicity
+// IEND marks the image end
 int main(void)
 {
     FILE* fp;
