@@ -8,7 +8,7 @@ CLAGS = -g -Wall
 #   
 #   #files to link:
 #LFLAGS = -L/usr/local/lib -lm -lgsl -lgslcblas
-LFLAGS = -lm -include scale.h
+LFLAGS = -lm 
 # the name to use for both the target source file, and the output file:
 TARGET = scale#
 all: $(TARGET)
