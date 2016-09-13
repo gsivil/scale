@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <scale.h>
+#include "scale.h"
+
 int main(void)
 {
-    printf("Hello, world!\n");
+    printf("Hello, world!\n\n%d\n", print1978());
     return 0;
 }
