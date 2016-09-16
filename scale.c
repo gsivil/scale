@@ -15,7 +15,18 @@ typedef struct allchunks {
     char CRC[4];
 } chunk;
 // Critical chunks
+// http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html
 // IHDR first chunk 13 bytes width, height, bit depth, color type, compression method, filter method, and interlace
+//
+//  Width:              4 bytes
+//  Height:             4 bytes
+//  Bit depth:          1 byte
+//  Color type:         1 byte
+//  Compression method: 1 byte
+//  Filter method:      1 byte
+//  Interlace method:   1 byte
+//
+//
 // method
 // PLTE contains the palette aka list of colors
 // IDAT contains the image, split it in multiple IDAT chunks for simplicity
