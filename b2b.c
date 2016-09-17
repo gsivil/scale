@@ -20,7 +20,8 @@ int main(void)
     initpcword(w1); 
     printpcword(w1);
     printf("%d", bintoint(w1));
-    invertbit(w1, 7);
+    invertbit(w1, 0);
+    invertbit(w1, 2);
     putchar('\n');
     printpcword(w1);
     printf("%d", bintoint(w1));
@@ -37,9 +38,8 @@ unsigned int bintoint(bool pcword[])
         x = x>>1;
         decint = decint + x*pcword[i];
         printf("%d %d\n", x, decint);
-        if (i == 0)
-            return decint;
     }
+    return decint;
 }
 void inttobin(unsigned int decint, bool pcword[])
 {   
@@ -57,8 +57,8 @@ void initpcword(bool pcword[])
 }
 void printpcword(bool pcword[])
 {
-    for (int n = 0;n<wordsize;n++)
-        printf("%d", pcword[n]);
+    for (int n = 0;n<=wordsize;n++)
+        printf("%d", pcword[wordsize-n]);
 
     putchar('\n');
 }
