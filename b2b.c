@@ -4,6 +4,7 @@
 #include <math.h>
 
 #define wordsize 8
+#define bytesize 8
 
 void initpcword(bool pcword[]);
 void printpcword(bool pcword[]);
