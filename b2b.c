@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <math.h>
 
-#define wordsize 18 
+#define wordsize 8 
 
 void initpcword(bool pcword[]);
 void printpcword(bool pcword[]);
@@ -27,7 +27,7 @@ int main(void)
     printpcword(w1);
     printf(" %d", bintoint(w1));
     putchar('\n');
-    for (unsigned int x = 0;x<=pow(2, wordsize); x++)
+    for (unsigned int x = 0;x<=pow(2, wordsize)-1; x++)
     {
         inttobin(x, w1);
         printf("%d\t", x);
