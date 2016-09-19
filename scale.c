@@ -18,6 +18,7 @@ typedef struct allchunks {
 // http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html
 // IHDR first chunk 13 bytes width, height, bit depth, color type, compression method, filter method, and interlace
 //
+//http://stackoverflow.com/questions/7942635/write-png-quickly
 //  Width:              4 bytes
 //  Height:             4 bytes
 //  Bit depth:          1 byte
