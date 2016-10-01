@@ -3,6 +3,11 @@
 
 int main(void)
 {
-    printf("Hello\n");
+    char* example = "0001.9";
+    double tatof =  atof(example);
+    int tatoi = atoi(example);
+    long tatol = atol(example);
+    long long tatoll = atoll(example);
+    printf("%s %f %d %ld %lld\n", example, tatof, tatoi, tatol, tatoll);
     return 0;
 }
