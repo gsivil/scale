@@ -1,13 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void exfun(void);
+#define EXIT_SUCCESS 0
+
 int main(void)
 {
-    char* example = "19geo32";
-    double tatof =  atof(example);
-    int tatoi = atoi(example);
-    long tatol = atol(example);
-    long long tatoll = atoll(example);
-    printf("%s %f %d %ld %lld\n", example, tatof, tatoi, tatol, tatoll);
+    int status = EXIT_SUCCESS;
+    atexit(exfun);
+    exit(0);
+    abort();
     return 0;
+}
+
+void exfun(void)
+{
+    for (int i = 0;i<3;i++)
+    {
+        for (int j = 0;j<i;j++)
+            printf("\t");
+        printf("%d\n", i);
+    };
+    putchar('\n');
 }
