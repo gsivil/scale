@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    char* example = "0001.9";
+    char* example = "19geo32";
     double tatof =  atof(example);
     int tatoi = atoi(example);
     long tatol = atol(example);
