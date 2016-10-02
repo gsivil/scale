@@ -6,10 +6,7 @@ void exfun(void);
 
 int main(void)
 {
-    int status = EXIT_SUCCESS;
-    atexit(exfun);
-    exit(0);
-    abort();
+    printf("%s\n", getenv("PWD"));
     return 0;
 }
 
