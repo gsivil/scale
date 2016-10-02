@@ -1,22 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-void exfun(void);
-#define EXIT_SUCCESS 0
+#define COUNT 10
+struct elem {int key; int data;} Table[COUNT];
+int key_compare(const void* e1, const void* e2);
 
 int main(void)
 {
-    printf("%s\n", getenv("PWD"));
+    int Table[COUNT] = {5, 6, 7, 8 , 9, 10, 11, 12, 13, 14};
+    struct elem* result;
+    struct elem key_elem;
+    key_elem.key = 11;
+
+    result = (struct elem *) bsearch(&key_elem, Table, COUNT, sizeof(struct elem), key_compare);
+//    printf("%d\n", result->data);
     return 0;
 }
 
-void exfun(void)
+int key_compare(const void* e1, const void* e2)
 {
-    for (int i = 0;i<3;i++)
-    {
-        for (int j = 0;j<i;j++)
-            printf("\t");
-        printf("%d\n", i);
-    };
-    putchar('\n');
+    int v1 = ((struct elem *)e1)->key;
+    int v2 = ((struct elem *)e2)->key;
+    return (v1 < v2) ? -1: (v1 > v2) ? 1: 0;
 }
