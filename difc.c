@@ -13,27 +13,22 @@
 // First diff within a word
 //
 //
-#define text1 "1.txt"
-#define text2 "2.txt"
 
 int main(void)
 {
-    FILE* fp1;
-    FILE* fp2;
     
-    fp1 = fopen(text1, "r");
-    fp2 = fopen(text2, "r");
-    char next1 = 'a';
-    char next2 = 'a';
-    while (((next1 = fgetc(fp1))  != EOF) && ((next2 = fgetc(fp2))  != EOF))
-    {
-        printf("%c", next1);
-        if (next1 != next2)
-            printf("*");
-        printf("%c", next2);
-    };
-    fclose(fp2);
-    fclose(fp1);
+    char* word1 = "Georgios";
+    char word2[] = "Georgio";
+    char word3[] = "Geoorgios";
+//    while(*word1 !='\0')
+//    {
+        printf("%c\n", *word1);
+        word1++;
+//    };
+        printf("%c\n", *word1);
+//    word1++;
+ //   *word1 = 'E';
+//    printf("%s\n", word1);
     return 0;
 }
 
