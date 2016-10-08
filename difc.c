@@ -13,22 +13,20 @@
 // First diff within a word
 //
 //
+void diffword(char* word1, char* word2);
 
 int main(void)
 {
     
     char* word1 = "Georgios";
-    char word2[] = "Georgio";
+    char* word2 = "Heorgios";
     char word3[] = "Geoorgios";
-//    while(*word1 !='\0')
-//    {
-        printf("%c\n", *word1);
-        word1++;
-//    };
-        printf("%c\n", *word1);
-//    word1++;
- //   *word1 = 'E';
-//    printf("%s\n", word1);
+    diffword(word1, word2);
     return 0;
 }
 
+void diffword(char* word1, char* word2)
+{
+    printf("%c\n", *word1);
+    printf("%c\n", *word2);
+}
