@@ -4,7 +4,7 @@
 
 // Compare DNA sequences TAGC
 // 1 2 3 4-letter words
-
+// sequence tab sequence endline
 
 #ifndef max
     #define max(a,b) ((a) > (b) ? (a) : (b))
@@ -17,11 +17,41 @@
 #define same 's'
 #define dif  'd'
 
+#define dnaDB "1.txt"
+#define tabsize 3
+
 char diffDNA(char* dna1, char* dna2);
 char chareq(char d1, char d2);
 
 int main(void)
 {
+    FILE* fp;
+    char* line = NULL;
+    size_t len = 0;
+    ssize_t read;
+    fp = fopen(dnaDB, "r");
+    int charatab, charbtab;
+    if (fp == NULL)
+        exit(EXIT_FAILURE);
+    while((read = getline(&line, &len, fp)) != -1)
+    {
+        charbtab = 0;
+        charatab = 0;
+        for (int i=0;i<strlen(line);i++)
+        {
+           if ((line[i] == ' ') && (charbtab == 0))
+           {
+               charbtab = i;
+               printf("%d ", charbtab);
+           };
+           if (line[i] == '\n')
+           {
+               charatab = i-charbtab-1;
+               printf("%d ", charatab);
+           };
+        }
+        printf("%s", line);
+    }
     char* dna1 = "TAGC";
     char* dna2 = "TAGC";
     char totcheck;
