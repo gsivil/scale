@@ -5,6 +5,7 @@
 // Compare DNA sequences TAGC
 // 1 2 3 4-letter words
 // sequence tab sequence endline
+// Find if a word is a DNA sequence and if yes find the number
 
 #ifndef max
     #define max(a,b) ((a) > (b) ? (a) : (b))
@@ -23,17 +24,62 @@
 char diffDNA(char* dna1, char* dna2);
 char chareq(char d1, char d2);
 void printDNAdb(char* DB);
+int checkDNA(char* dna1);
 
 int main(void)
 {
 
         
-    printDNAdb(dnaDB);
-    char* dna1 = "TAGC";
-    char* dna2 = "TAGC";
-    char totcheck;
-    totcheck =  diffDNA(dna1, dna2);
-    printf("%c\n", totcheck); 
+//    printDNAdb(dnaDB);
+    char* dna1 ="CC";
+    checkDNA(dna1);
+    return 0;
+}
+
+int checkDNA(char* dna1)
+{
+    FILE* fp;
+    fp = fopen(dnaDB, "r");
+    char* line = NULL;
+    char* token;
+    size_t len = 0;
+    ssize_t read;
+    char s1[2] = " ";
+    char s2[2] = "\n";
+    char* num;
+    char testeq;
+    if (fp == NULL)
+        exit(EXIT_FAILURE);
+    while((read = getline(&line, &len, fp)) != -1)
+    {
+        //printf("%s", line);
+        if (token != NULL)
+        {
+            num  = strtok(line, s1);
+            printf("%s ", num);
+            token  = strtok(NULL, s2);
+            testeq = diffDNA(dna1, token); 
+            if (testeq == 'S')
+            {
+                printf("%s %c\n", token, testeq);
+                break;
+            }
+            else
+            {
+                printf("%s %c\n", token, testeq);
+            };
+        };
+    };
+    
+    fclose(fp);
+    char sameDNA = 'D';
+    if (testeq == 'S')
+        sameDNA = 1;
+    else
+    {
+        sameDNA = 0;
+        printf("\nNot found\n");
+    };
     return 0;
 }
 char diffDNA(char* dna1, char* dna2)
@@ -43,33 +89,22 @@ char diffDNA(char* dna1, char* dna2)
     int c1 = strlen(d1);
     int c2 = strlen(d2);
     char samenot;
-    char totcheck = 'S';
-    for (int i = 0;i<min(c1, c2);i++)
+    char totcheck;
+    if (c1 == c2)
     {
-        samenot = chareq(*d1, *d2);
-        if (samenot == dif)
-            totcheck = 'D';
-        printf("%d %c %c %c\n", i, *d1++, *d2++, samenot);
-    };
-
-    char space = '_';
-    if (c1 > c2)
-        for (int i=c2;i<c1;i++)
+        totcheck = 'S';
+        for (int i = 0;i<c1;i++)
         {
             samenot = chareq(*d1, *d2);
+            d1++;
+            d2++;
             if (samenot == dif)
                 totcheck = 'D';
-            printf("%d %c %c %c\n", i,  *d1++, space, samenot );
-        }
-    else if (c2 > c1)
-        for (int i=c1;i<c2;i++)
-        {
-            samenot = chareq(*d1, *d2);
-            if (samenot == dif)
-                totcheck = 'D';
-            printf("%d %c %c %c\n", i, space, *d2++, samenot );
         };
-
+    }
+    else
+        totcheck = 'D';
+    printf("\t");
     return totcheck;
 }
 
@@ -77,9 +112,15 @@ char chareq(char d1, char d2)
 {
     char sameornot;
     if (d1 == d2)
+    {
         sameornot = same;
+        printf("S");
+    }
     else
+    {
         sameornot = dif;
+        printf("D");
+    };
     return sameornot;        
 }
 void printDNAdb(char* DB)

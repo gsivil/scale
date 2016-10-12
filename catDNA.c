@@ -22,14 +22,14 @@ int main(void)
     for (int i=0;i<size;i++)
         for (int j=0;j<size;j++)
         {
-            fprintf(fp, "%d %c %c\n", n, DNA[i], DNA[j]);
+            fprintf(fp, "%d %c%c\n", n, DNA[i], DNA[j]);
             n = n+1;
         };
     for (int i=0;i<size;i++)
         for (int j=0;j<size;j++)
             for (int k=0;k<size;k++)
             {
-                 fprintf(fp, "%d %c %c %c\n", n, DNA[i], DNA[j], DNA[k]);
+                 fprintf(fp, "%d %c%c%c\n", n, DNA[i], DNA[j], DNA[k]);
                  n = n+1;
             };
 
@@ -38,7 +38,7 @@ int main(void)
             for (int k=0;k<size;k++)
                 for (int l=0;l<size;l++)
                     {
-                    fprintf(fp, "%d %c %c %c %c\n", n, DNA[i], DNA[j], DNA[k], DNA[l]);
+                    fprintf(fp, "%d %c%c%c%c\n", n, DNA[i], DNA[j], DNA[k], DNA[l]);
                     n = n+1;
                     };
     fclose(fp);
