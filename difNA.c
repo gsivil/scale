@@ -17,7 +17,7 @@
 #define same 's'
 #define dif  'd'
 
-#define dnaDB "1.txt"
+#define dnaDB "listDNA.txt"
 #define tabsize 3
 
 char diffDNA(char* dna1, char* dna2);

@@ -13,8 +13,7 @@ int main(void)
 
     FILE* fp;
     fp = fopen(listDNA, "w");
-    fputc(DNA[0], fp);
-    int n = 0;
+    int n = 1;
     for (int i=0;i<size;i++)
     {
         fprintf(fp, "%d %c\n", n, DNA[i]);
