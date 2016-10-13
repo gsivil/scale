@@ -31,7 +31,9 @@ int main(void)
 
         
 //    printDNAdb(dnaDB);
-    char* dna1 ="CC";
+//    char* dna1 ="CC";
+    char dna1[4];
+    scanf("%s", dna1);
     checkDNA(dna1);
     return 0;
 }
