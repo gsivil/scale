@@ -15,13 +15,25 @@ int main(void)
         token = strtok(NULL, " ");
         if (token != NULL)
         {
-            if (!strcmp(token, string1))
-            {
+//            if (!strcmp(token, string1))
+ //           {
+//                printf("%c", *token);
+//                token--;
+ //               *token = 'c';
+                printf("%s ", token);
                 i = i+1;
-            };
+  //          };
         };
     };
     printf("'%s' has %d characters and appears %d times\n",string1, strlen(string1),i );
+    int m = 0;
+    char** tp;
+    tp = &text;
+    while (m < strlen(text))
+    {
+        printf("%c\n", tp++);
+        m++;
+    };
 
     return 0;
 }
