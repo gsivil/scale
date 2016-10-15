@@ -4,36 +4,37 @@
 // Find all the occurances of a word in a text and replace them with a given word
 int main(void)
 {
-    char text[] = "The British Broadcasting Corporation (BBC) is a British public service broadcaster. It is headquartered at Broadcasting House in London, and is the world's oldest national broadcasting organisation[3] and the largest broadcaster in the world by number of employees, with over 20,950 staff in total, of whom 16,672 are in public sector broadcasting;[2][4][5][6][7] including part-time, flexible as well as fixed contract staff, the total number is 35,402.[8] The BBC is established under a Royal Charter[9] and operates under its Agreement with the Secretary of State for Culture, Media and Sport.[10] Its work is funded principally by an annual television licence fee[11] which is charged to all British households, companies, and organisations using any type of equipment to receive or record live television broadcasts.[12] The fee is set by the British Government, agreed by Parliament,[13] and used to fund the BBC's extensive radio, TV, and online services covering the nations and regions of the UK. From 1 April 2014, it also funds the BBC World Service, launched in 1932, which provides comprehensive TV, radio, and online services in Arabic, and Persian, and broadcasts in 28 languages.";
+    char text[] = "My name is G and A and you you you I live somewhere. What about you? Where do you live?";
+    char newtext[] = "\0";
     char* token;
-    char* string1 = "the";
+    char* string1 = "you";
+    char* string3 = "you?";
+    char* string4 = "you.";
+    char* string5 = "you,";
+    char* string2 = "YOU";
     token  = strtok(text, " ");
-//    printf("%s\n", token);
+    printf("%s\n", newtext);
     int i = 0;
     while (token != NULL)
     {
-        token = strtok(NULL, " ");
-        if (token != NULL)
+        if (!strcmp(token, string1) || !strcmp(token, string3) || !strcmp(token, string4) || !strcmp(token, string5))
         {
-//            if (!strcmp(token, string1))
- //           {
-//                printf("%c", *token);
-//                token--;
- //               *token = 'c';
-                printf("%s ", token);
-                i = i+1;
-  //          };
+            printf("%s ", token);
+            strcat(newtext, " ");
+            strcat(newtext, string2);
+            i = i+1;
+        }
+        else
+        {
+            printf("%s ", token);
+            strcat(newtext, " ");
+            strcat(newtext, token);
         };
+        token = strtok(NULL, " ");
+
     };
-    printf("'%s' has %d characters and appears %d times\n",string1, strlen(string1),i );
-    int m = 0;
-    char** tp;
-    tp = &text;
-    while (m < strlen(text))
-    {
-        printf("%c\n", tp++);
-        m++;
-    };
+    putchar('\n');
+    printf("%s\n", newtext);
 
     return 0;
 }
