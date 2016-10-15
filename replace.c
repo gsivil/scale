@@ -17,7 +17,7 @@ int main(void)
             printf("%s ", token);
             if (token[strlen(token) - 1] == '.')
                 i = i+1;
-            printf("%c \n", token[strlen(token)-1]);
+            printf("%d %c \n", strlen(token), token[strlen(token)-1]);
         };
     };
     printf("The text has %d sentences\n", i);
