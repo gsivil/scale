@@ -2,27 +2,46 @@
 #include <string.h>
 
 // Find all the occurances of a word in a text and replace them with a given word
+
+#define textsize 1000
 int main(void)
 {
-    char text[] = "My name is G and A and you you you I live somewhere. What about you? Where do you live?";
-    char newtext[] = "\0";
+    char text[] = "you. name is G and A and you you you I live somewhere. What about you? Where do you live?";
+    char newtext[textsize] = "\0";
     char* token;
     char* string1 = "you";
     char* string3 = "you?";
     char* string4 = "you.";
     char* string5 = "you,";
-    char* string2 = "YOU";
+    // Here we could thing of capital letters but it would not change the code much
+    char* string2 = "_x_x_";
     token  = strtok(text, " ");
-    printf("%s\n", newtext);
-    int i = 0;
+    if (!strcmp(token, string1) || !strcmp(token, string3) || !strcmp(token, string4) || !strcmp(token, string5))
+        {
+            printf("%s ", token);
+            strcat(newtext, string2);
+        }
+    else
+        {
+            printf("%s ", token);
+            strcat(newtext, token);
+        };
+    token = strtok(NULL, " "); 
     while (token != NULL)
     {
-        if (!strcmp(token, string1) || !strcmp(token, string3) || !strcmp(token, string4) || !strcmp(token, string5))
+        if (!strcmp(token, string1))
         {
             printf("%s ", token);
             strcat(newtext, " ");
             strcat(newtext, string2);
-            i = i+1;
+        }
+        else if (!strcmp(token, string3) || !strcmp(token, string4) || !strcmp(token, string5))
+
+        {
+            printf("%s", token);
+            strcat(newtext, " ");
+            strcat(newtext, string2);
+            strcat(newtext, &token[strlen(token)-1]);
         }
         else
         {
