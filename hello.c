@@ -1,34 +1,52 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 #define picture "dots.pgm"
 
 void makeheaders(char* pict, char* comment, int dimx, int dimy, int range);
+void makepicture(char* pict, char* comment, int dimx, int dimy, int range);
+void makedata(char* pict, int dimx, int dimy, int range);
+
 
 int main(void)
 {
-    
+     
     FILE* fp1;
     int dimx, dimy, range;
     dimx = 200;
     dimy = 200;
     range = 15;
-    makeheaders(picture, "#test comment", dimx, dimy, range);
-    fp1 = fopen(picture, "a");
-    for (int i= 0;i<dimx;i++)
+    char* comment = "#Dots at random positions";
+    makepicture(picture, comment, dimx, dimy, range);
+    putchar('\n');
+    return 0;
+}
+
+void makepicture(char* pict, char* comment, int dimx, int dimy, int range)
+{
+    makeheaders(pict, comment, dimx, dimy, range);
+    makedata(pict, dimx, dimy, range);
+
+}
+void makedata(char* pict, int dimx, int dimy, int range)
+{
+    FILE* fp1;
+    fp1 = fopen(pict, "a");
+    int thres = 14;
+    for (int i= 0;i<dimy;i++)
     {
-        for (int j=0;j<dimy;j++)
+        for (int j=0;j<dimx;j++)
         {
-            if ((i == 100) && (j == 103))
-                fprintf(fp1, "%d ", range+1);
+            if ((rand()%(range+1) > thres) && (rand()%(range+1) > thres))
+                fprintf(fp1, "%d ",  rand()%(range+1));
             else
                 fprintf(fp1, "%d ", 0);
         }
         fprintf(fp1, "\n");
     };
-    putchar('\n');
-    return 0;
+    fclose(fp1);
 }
-
 
 void makeheaders(char* pict, char* comment, int dimx, int dimy, int range)
 {
