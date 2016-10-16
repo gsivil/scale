@@ -1,28 +1,53 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 #define picture "dots.pgm"
+#define metadots "metadots.pgm"
+
+// Use struct to save the dot location
 
 void makeheaders(char* pict, char* comment, int dimx, int dimy, int range);
 void makepicture(char* pict, char* comment, int dimx, int dimy, int range);
 void makedata(char* pict, int dimx, int dimy, int range);
-
+int countdots(char* pict);
 
 int main(void)
 {
      
-    FILE* fp1;
-    int dimx, dimy, range;
-    dimx = 200;
-    dimy = 200;
-    range = 15;
-    char* comment = "#Dots at random positions";
-    makepicture(picture, comment, dimx, dimy, range);
+//    The following create the picture that we will be processing
+//    FILE* fp1;
+//    int dimx, dimy, range;
+//    dimx = 200;
+//    dimy = 200;
+//    range = 15;
+//    char* comment = "#Dots at random positions";
+//makepicture(picture, comment, dimx, dimy, range);
+    countdots(metadots); 
     putchar('\n');
     return 0;
 }
-
+int countdots(char* pict)
+{
+    FILE* fp;
+    fp = fopen(pict, "r");
+    char* token;
+    char line[1000];
+    while(fgets(line, sizeof(line), fp))
+    {
+        token = strtok(line, "");
+        while (token != NULL)
+        {
+             printf("%s", token);
+             token =  strtok(NULL, " ");
+//             if (*token) 
+                 printf("dot");
+        };
+    };
+    fclose(fp);
+    return 0;
+}
 void makepicture(char* pict, char* comment, int dimx, int dimy, int range)
 {
     makeheaders(pict, comment, dimx, dimy, range);
