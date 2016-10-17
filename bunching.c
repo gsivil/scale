@@ -17,15 +17,43 @@ int main(void)
     FILE* fp;
     fp = fopen(data, "r");
     char nextchar = '0';
-    int winlen = 10;
+    int winlen = 7;
     int datasize = countphotons();
+    int timeslots = datasize/winlen;
+    int remainder = datasize-timeslots*winlen;
+    int photinwin[timeslots+1];
+    for (int i = 0;i<timeslots;i++)
+    {
+        int count = 0;
+        for (int j = 0;j<winlen;j++)
+        {
+            nextchar = fgetc(fp);
+            if (nextchar == '1')
+                count = count+1;
+        };
+        photinwin[i] =  count;
+    }; 
+    int count = 0;
+    for (int j = 0;j<remainder;j++)
+    {
+        nextchar = fgetc(fp);
+        if (nextchar == '1')
+            count = count+1;
+    };
+    photinwin[timeslots] = count*winlen/remainder;
+        
+    for (int i = 0;i<(timeslots+1);i++)
+        printf("%d ", photinwin[i]); 
+    
+    printf("\n");
+    printf("%d %d\n", timeslots, remainder);
     printf("%d shots\n", datasize);
     printf("The data is non-classical\n");
     showdata();
     putchar('\n');
     return 0;
 }
-
+                 
 int countphotons(void)
 {
     FILE* fp;
