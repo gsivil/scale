@@ -9,7 +9,42 @@
 
 #define data "photons.txt"
 
+int countphotons(void);
+void showdata(void);
+
 int main(void)
+{
+    FILE* fp;
+    fp = fopen(data, "r");
+    char nextchar = '0';
+    int winlen = 10;
+    int datasize = countphotons();
+    printf("%d shots\n", datasize);
+    printf("The data is non-classical\n");
+    showdata();
+    putchar('\n');
+    return 0;
+}
+
+int countphotons(void)
+{
+    FILE* fp;
+    fp = fopen(data, "r");
+    char nextchar = '0';
+    int i = 0;
+    while (nextchar != EOF)
+    {
+        nextchar = fgetc(fp);
+        if (nextchar != EOF)
+        {
+            i = i+1;
+        };
+    }
+    fclose(fp);
+    return i-1;
+}
+
+void showdata(void)
 {
     FILE* fp;
     fp = fopen(data, "r");
@@ -17,13 +52,10 @@ int main(void)
     while (nextchar != EOF)
     {
         nextchar = fgetc(fp);
-        if (nextchar != EOF)
+        if ((nextchar != EOF) && (nextchar != '\n') && (nextchar != '\0'))
         {
-            printf("%c", nextchar);
+            printf("%d", nextchar-'0');
         };
     }
-    printf("The data is non-classical\n");
-    return 0;
+    fclose(fp);
 }
-
-
