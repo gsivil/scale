@@ -9,7 +9,7 @@
 
 #define data "photons.txt"
 
-const int winlen = 13;
+const int winlen = 23;
 int countphotons(void);
 void showdata(void);
 void displaydiagram(float photoprob[]);
