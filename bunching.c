@@ -4,12 +4,11 @@
 // after that determine if we have bunching or not
 // Choose a length of integration window and then take the average of all windows of windows of the same length then do
 // a probability distribution
-// If the total shots are for example 1007 and the window length is 10 the last 7 will be normalized by takine
-// (1007-10*1000/10)*10/7
+// If the total shots are for example 1007 and the window length is 10 the last 7 will discarded
 
 #define data "photons.txt"
 
-const int winlen = 23;
+const int winlen = 33;
 int countphotons(void);
 void showdata(void);
 void displaydiagram(float photoprob[]);
@@ -21,8 +20,7 @@ int main(void)
     char nextchar = '0';
     int datasize = countphotons();
     int timeslots = datasize/winlen;
-    int remainder = datasize-timeslots*winlen;
-    int photinwin[timeslots+1];
+    int photinwin[timeslots];
     for (int i = 0;i<timeslots;i++)
     {
         int count = 0;
@@ -34,36 +32,26 @@ int main(void)
         };
         photinwin[i] =  count;
     }; 
-    int count = 0;
-    for (int j = 0;j<remainder;j++)
-    {
-        nextchar = fgetc(fp);
-        if (nextchar == '1')
-            count = count+1;
-    };
-    if (remainder != 0)
-        photinwin[timeslots] = count*winlen/remainder;
-    else
-        photinwin[timeslots] = count;
         
-    for (int i = 0;i<(timeslots+1);i++)
+    for (int i = 0;i<timeslots;i++)
         printf("%d ", photinwin[i]); 
     float photoprob[winlen];
     for (int i = 0;i<winlen;i++)
     {
         photoprob[i] = 0;
     };
+    int count  = 0;
     for (int i = 0;i<winlen;i++)
     {
         count = 0;
-        for (int j=0;j<(timeslots+1);j++)
+        for (int j=0;j<timeslots;j++)
         {
               if (photinwin[j] == i)
               {
                   count = count +1;
               };
         };
-        photoprob[i] =(float) count/(timeslots+1);
+        photoprob[i] =(float) count/timeslots;
     };
     for (int i = 0;i<winlen;i++)
     {
@@ -76,7 +64,7 @@ int main(void)
     };
     printf("Total probability: %0.2f", normprob);
     printf("\n");
-    printf("%d %d\n", timeslots, remainder);
+    printf("%d\n", timeslots);
     printf("%d shots\n", datasize);
     printf("The data is non-classical\n");
     showdata();
