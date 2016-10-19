@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 // Take a series of 0 and 1 and determine the statistics
 // after that determine if we have bunching or not
@@ -9,7 +10,7 @@
 
 #define data "photons.txt"
 
-const int winlen = 40;
+const int winlen = 20;
 const long int datalen = 1000000;
 
 int countphotons(void);
@@ -87,7 +88,7 @@ void makedata(long int datasize, double seed)
     for(long int i = 0;i<datasize;i++)
     {
         randomgen = rand()%winlen;
-        if (randomgen < (int) winlen/2)
+        if (randomgen < (int) (winlen/3))
             fputc('1',fp);
         else
             fputc('0', fp);
@@ -100,7 +101,7 @@ void displaydiagram(float photoprob[])
     for (int i = 0;i<winlen;i++)
     {
         discprob = 200*photoprob[i];
-        printf("%d ", i);
+        printf("%3.0d ", i);
         for (int j = 0;j<discprob;j++)
             putchar('*');
         printf(" %0.2f\n", 100*photoprob[i]);
