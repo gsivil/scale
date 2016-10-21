@@ -10,7 +10,7 @@
 
 #define data "photons.txt"
 
-const int winlen = 20;
+const int winlen = 30;
 const long int datalen = 1000000;
 
 int countphotons(void);
@@ -79,34 +79,54 @@ int main(void)
     return 0;
 
 }
+int maxele(float photoprob[])
+{
+    int maxloc = 0;
+    for (int i = 0;i<winlen;i++)
+    {
+       if (photoprob[i] > photoprob[maxloc]) 
+           maxloc = i;
+    };
+    return maxloc;
+}
 void makedata(long int datasize, double seed)
 {
     FILE* fp;
     srand(seed);
     fp = fopen("photons.txt", "w");
     int randomgen = 0;
+    int prevdig = 0;
+    char nextchar = '1';
     for(long int i = 0;i<datasize;i++)
     {
         randomgen = rand()%winlen;
-        if (randomgen < (int) (winlen/3))
-            fputc('1',fp);
+        if (((double) randomgen/winlen > 0.50))// || (i%(2*winlen) > 1.27*winlen))
+        {
+            nextchar = '0';
+            fputc(nextchar,fp);
+        }
         else
-            fputc('0', fp);
+        {
+            nextchar = '1';
+            fputc(nextchar, fp);
+        };
     };
     fclose(fp);
 }
 void displaydiagram(float photoprob[])
 {
     int discprob = 0;
+    int maxprobinscreen = 70;
     for (int i = 0;i<winlen;i++)
     {
-        discprob = 200*photoprob[i];
-        printf("%3.0d ", i);
+        discprob = maxprobinscreen*photoprob[i]/photoprob[maxele(photoprob)];
+        printf("%3.1d ", i);
         for (int j = 0;j<discprob;j++)
             putchar('*');
         printf(" %0.2f\n", 100*photoprob[i]);
     };
-}
+};
+
 int countphotons(void)
 {
     FILE* fp;
@@ -130,12 +150,19 @@ void showdata(void)
     FILE* fp;
     fp = fopen(data, "r");
     char nextchar = '0';
+    int count = 0;
     while (nextchar != EOF)
     {
         nextchar = fgetc(fp);
         if ((nextchar != EOF) && (nextchar != '\n') && (nextchar != '\0'))
         {
             printf("%d", nextchar-'0');
+            count = count+1;
+            if (count == winlen)
+            {
+                putchar('\n');
+                count = 0;
+            };
         };
     }
     fclose(fp);
