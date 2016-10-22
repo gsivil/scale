@@ -10,13 +10,15 @@
 
 #define data "photons.txt"
 
-const int winlen = 30;
-const long int datalen = 1000000;
+const int winlen = 6;
+const long int datalen = 10000000;
 
 int countphotons(void);
 void showdata(void);
 void displaydiagram(float photoprob[]);
 void makedata(long int datasize, double seed);
+int maxele(float photoprob[]);
+unsigned long long int fact(int n);
 
 int main(void)
 {
@@ -79,6 +81,19 @@ int main(void)
     return 0;
 
 }
+unsigned long long int fact(int n)
+{
+    long long int facto = 1;
+    if (n == 0)
+        return facto;
+    else
+        for (int i = 0;i<n;i++)
+        {
+            facto = fact(i)*(i+1);
+        }
+    return facto;
+}
+
 int maxele(float photoprob[])
 {
     int maxloc = 0;
@@ -100,14 +115,14 @@ void makedata(long int datasize, double seed)
     for(long int i = 0;i<datasize;i++)
     {
         randomgen = rand()%winlen;
-        if (((double) randomgen/winlen > 0.50))// || (i%(2*winlen) > 1.27*winlen))
+        if (((double) randomgen/winlen < 0.50))// || (i%(2*winlen) > 1.27*winlen))
         {
-            nextchar = '0';
+            nextchar = '1';
             fputc(nextchar,fp);
         }
         else
         {
-            nextchar = '1';
+            nextchar = '0';
             fputc(nextchar, fp);
         };
     };
@@ -116,14 +131,14 @@ void makedata(long int datasize, double seed)
 void displaydiagram(float photoprob[])
 {
     int discprob = 0;
-    int maxprobinscreen = 70;
+    int maxprobinscreen = 50;
     for (int i = 0;i<winlen;i++)
     {
         discprob = maxprobinscreen*photoprob[i]/photoprob[maxele(photoprob)];
         printf("%3.1d ", i);
         for (int j = 0;j<discprob;j++)
             putchar('*');
-        printf(" %0.2f\n", 100*photoprob[i]);
+        printf(" %0.2f %0.2f\n", 100*photoprob[i] , 100*17.50/12.51*pow(0.5*winlen,i)*exp(-0.5*winlen)/(float) fact(i));
     };
 };
 
